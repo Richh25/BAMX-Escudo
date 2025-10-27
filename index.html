@@ -115,21 +115,21 @@
         
         <div class="carrusel-slide active">
             <span class="image main"><img src="secuestro.jpg" alt="Secuestro Virtual" /></span>
-            <p class="carrusel-caption">**1. Secuestro Virtual:** Simulación del secuestro de un familiar, exigiendo un rescate urgente bajo amenaza.</p>
+            <p class="carrusel-caption"> <b>Secuestro Virtual:</b> Simulación del secuestro de un familiar, exigiendo un rescate urgente bajo amenaza.</p>
         </div>
 
         <div class="carrusel-slide">
-            <span class="image main"><img src="GEMINI.PNG" alt="Extorsión Carcelaria" /></span>
-            <p class="carrusel-caption">**2. Extorsión Carcelaria:** Simulan la detención de un conocido y exigen dinero para su supuesta liberación inmediata.</p>
+            <span class="image main"><img src="extorsiontelefonica.PNG" alt="Extorsión Carcelaria" /></span>
+            <p class="carrusel-caption"> <b>Extorsión Carcelaria:</b> Simulan la detención de un conocido y exigen dinero para su supuesta liberación inmediata.</p>
         </div>
 
         <div class="carrusel-slide">
             <span class="image main"><img src="falsas.jpg" alt="Falsa Recompensa" /></span>
-            <p class="carrusel-caption">**3. Falsa Recompensa:** Engaño que notifica un premio (viaje, auto, dinero) y condiciona la entrega a un depósito bancario.</p>
+            <p class="carrusel-caption"> <b>Falsa Recompensa:</b> Engaño que notifica un premio (viaje, auto, dinero) y condiciona la entrega a un depósito bancario.</p>
         </div>
 		 <div class="carrusel-slide">
             <span class="image main"><img src="cuidado.jpeg" alt="Falsa Recompensa" /></span>
-            <p class="carrusel-caption">**4. Caza de Ballenas:** Engaño que notifica un premio (viaje, auto, dinero) y condiciona la entrega a un depósito bancario.</p>
+            <p class="carrusel-caption"> <b>Caza de Ballenas:</b> Engaño que notifica un premio (viaje, auto, dinero) y condiciona la entrega a un depósito bancario.</p>
         </div>
 
         <button class="carrusel-prev" aria-label="Anterior">&#10094;</button>
@@ -156,18 +156,16 @@
 	
 
 						<article id="gracias">
-								
-								
-								<h2 class="major gracias-text">GRACIAS</h2>
-								<div class="image-center">
-									<img src="HACK.png" alt="Hacker con sudadera sin fondo" class="gracias-img" />
-								</div>
-								<p>POR TU ATENCION.</p>
+    <h2 class="major gracias-text">GRACIAS</h2>
+    
+    <div class="image-center">
+        <img src="HACK.png" alt="Hacker con sudadera sin fondo" class="gracias-img" /> 
+    </div>
+    
+    <p>POR TU ATENCION.</p>
+    <H3><b>NO CONFIEN, SIEMPRE VERIFIQUEN.</b></H3>
 
-								<H3>NO CONFIEN, SIEMPRE VERIFIQUEN.</H3>
-
-							</article>
-
+</article>
 					</div>
 
 				<footer id="footer">
@@ -189,43 +187,127 @@
 
 <script>
     $(document).ready(function() {
-        let slideIndex = 1;
-        showSlides(slideIndex);
+        let slideIndex = 0; // Se inicializa en 0 para que la función auto-play empiece correctamente
 
-        // Controles de siguiente/anterior
-        $('.carrusel-prev').on('click', function() {
-            plusSlides(-1);
-        });
-
-        $('.carrusel-next').on('click', function() {
-            plusSlides(1);
-        });
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function showSlides(n) {
+        // Función principal para mostrar las diapositivas
+        function showSlides() {
             let i;
             let slides = $('.carrusel-slide');
-            
-            // Si llegamos al final, volvemos al inicio
-            if (n > slides.length) {
-                slideIndex = 1;
-            }    
-            // Si vamos hacia atrás desde el inicio, vamos al final
-            if (n < 1) {
-                slideIndex = slides.length;
-            }
             
             // Oculta todas las diapositivas
             for (i = 0; i < slides.length; i++) {
                 $(slides[i]).removeClass('active');
             }
             
+            // Avanza al siguiente índice
+            slideIndex++;
+            
+            // Si llega al final, vuelve al inicio
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            
             // Muestra solo la diapositiva actual
             $(slides[slideIndex - 1]).addClass('active');
+            
+            // Llama a la función showSlides cada 5000 milisegundos (5 segundos)
+            // Cambia el '5000' por el intervalo que desees.
+            setTimeout(showSlides, 5000); 
         }
+
+        // --- Funcionalidad manual (Flechas) ---
+
+        // Función para cambiar manualmente el índice
+        function plusSlides(n) {
+             slideIndex += n - 1; // Se resta 1 porque showSlides ya incrementa en 1.
+             if (slideIndex < 0) { // Manejar el retroceso manual desde el inicio
+                 slideIndex = slides.length - 1;
+             }
+             // Llamamos a showSlides inmediatamente, cancelando el timer actual.
+             clearTimeout(); // Esto no funciona así en JavaScript puro/jQuery, pero haremos que la función manual anule el ciclo
+             showSlides();
+        }
+
+        // Inicializa el carrusel y lo pone en modo automático
+        showSlides();
+        
+        // Controles de siguiente/anterior
+        $('.carrusel-prev').on('click', function() {
+            // Detiene el ciclo automático temporalmente y fuerza el cambio
+            slideIndex--;
+            if (slideIndex < 0) {
+                 slideIndex = slides.length - 1;
+            }
+            
+            clearTimeout(autoPlayTimer); // Detiene el timer
+            showSlidesManual(); // Muestra el slide y reinicia el timer
+
+        });
+
+        $('.carrusel-next').on('click', function() {
+            // Detiene el ciclo automático temporalmente y fuerza el cambio
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            
+            clearTimeout(autoPlayTimer); // Detiene el timer
+            showSlidesManual(); // Muestra el slide y reinicia el timer
+        });
+
+        // RE-IMPLEMENTACIÓN MÁS ROBUSTA PARA EVITAR ERRORES DE TIMER CONFLICTIVO
+        
+        let autoPlayTimer;
+        
+        function showSlidesAuto() {
+            slideIndex++;
+            
+            let slides = $('.carrusel-slide');
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+            
+            // Oculta/muestra
+            slides.removeClass('active');
+            $(slides[slideIndex]).addClass('active');
+            
+            // Reinicia el temporizador
+            autoPlayTimer = setTimeout(showSlidesAuto, 5000);
+        }
+
+        function showSlidesManual() {
+            let slides = $('.carrusel-slide');
+            
+            // Ajuste del índice
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            } else if (slideIndex < 0) {
+                 slideIndex = slides.length - 1;
+            }
+            
+            // Oculta/muestra
+            slides.removeClass('active');
+            $(slides[slideIndex]).addClass('active');
+            
+            // Reinicia el temporizador inmediatamente después del click
+            clearTimeout(autoPlayTimer);
+            autoPlayTimer = setTimeout(showSlidesAuto, 5000);
+        }
+
+        // Inicia el ciclo automático
+        showSlidesAuto();
+        
+        // Controles de siguiente/anterior (re-asignados para la nueva lógica manual)
+        $('.carrusel-prev').off('click').on('click', function() {
+            slideIndex--;
+            showSlidesManual();
+        });
+
+        $('.carrusel-next').off('click').on('click', function() {
+            slideIndex++;
+            showSlidesManual();
+        });
+
     });
 </script>
 
