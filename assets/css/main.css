@@ -1662,3 +1662,57 @@ input, select, textarea {
 .carrusel-prev:hover, .carrusel-next:hover {
     color: #ffffff;
 }
+
+
+/* --- ESTILOS PARA EL SEGMENTO DE AGRADECIMIENTO/GRACIAS --- */
+
+#gracias {
+    text-align: center; /* Centra el texto y los títulos */
+}
+
+/* Contenedor para centrar la imagen */
+#gracias .image-center {
+    display: flex;
+    justify-content: center; /* CLAVE: Centra horizontalmente la imagen */
+    margin: 1rem auto 2rem auto; /* Espacio vertical */
+}
+
+/* Estilos para la imagen del muñeco azul (Control de tamaño) */
+#gracias .gracias-img {
+    
+    /* CONTROL DE TAMAÑO: No más del 40% del ancho del artículo */
+    max-width: 40%; 
+    
+    /* TAMAÑO MÁXIMO EN PÍXELES: Evita que sea gigante en pantallas grandes */
+    max-height: 300px; 
+    max-width: 300px;
+    
+    height: auto;
+    border-radius: 0;
+    
+    /* Agregamos una transición suave para que parezca más estético */
+    transition: transform 0.5s ease-in-out; 
+}
+
+/* Estilo para el texto GRACIAS (h2) */
+#gracias .gracias-text {
+    font-size: 5rem; 
+    line-height: 1.2;
+    letter-spacing: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilo para la frase final */
+#gracias h3 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: #00ffff; /* Color de acento */
+}
+
+/* Media query para pantallas pequeñas: usa un poco más de espacio si es necesario */
+@media screen and (max-width: 736px) {
+    #gracias .gracias-img {
+        max-width: 70%; 
+        max-height: 300px; 
+    }
+}
