@@ -1716,3 +1716,36 @@ input, select, textarea {
         max-height: 300px; 
     }
 }
+
+/* --- ESTILOS PARA EL LOGO SUPERPUESTO EN EL FONDO --- */
+
+#logo-overlay {
+    position: fixed; /* Se mantiene fijo mientras el contenido se mueve */
+    z-index: 2;      /* Asegura que esté por encima del fondo (#bg) */
+    
+    /* Centrado Geométrico: Coloca el punto de anclaje en el centro de la pantalla */
+    top: 50%; 
+    left: 50%;
+    
+    /* Centrado Absoluto: Mueve el elemento hacia atrás la mitad de su propio tamaño */
+    transform: translate(-50%, -50%); 
+    
+    /* TAMAÑO DEL LOGO: AJUSTA ESTOS VALORES */
+    /* El tamaño se estima en 120px para el círculo del rey */
+    width: 120px;  
+    height: 120px; 
+    
+    display: flex; /* Para centrar la imagen dentro de este contenedor */
+    justify-content: center;
+    align-items: center;
+}
+
+#logo-overlay img {
+    /* El logo se adapta al 100% del contenedor (#logo-overlay) */
+    max-width: 100%;  
+    max-height: 100%; 
+    object-fit: contain; /* Asegura que el logo se vea completo sin estirarse */
+    
+    /* Si tu logo tiene forma cuadrada, añade border-radius para que parezca un círculo si es necesario */
+    /* border-radius: 50%; */ 
+}
