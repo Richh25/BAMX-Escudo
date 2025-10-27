@@ -1684,8 +1684,8 @@ input, select, textarea {
     max-width: 40%; 
     
     /* TAMAÑO MÁXIMO EN PÍXELES: Evita que sea gigante en pantallas grandes */
-    max-height: 250px; 
-    max-width: 250px;
+    max-height: 300px; 
+    max-width: 300px;
     
     height: auto;
     border-radius: 0;
@@ -1742,8 +1742,8 @@ input, select, textarea {
 
 #logo-overlay img {
     /* El logo se adapta al 100% del contenedor (#logo-overlay) */
-    max-width: 150%;  
-    max-height: 150%; 
+    max-width: 100%;  
+    max-height: 100%; 
     object-fit: contain; /* Asegura que el logo se vea completo sin estirarse */
     
     /* Si tu logo tiene forma cuadrada, añade border-radius para que parezca un círculo si es necesario */
